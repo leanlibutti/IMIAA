@@ -1,6 +1,11 @@
 /*
  * main.c
-
+ *
+ *  Created on: 27 Nov. de 2016
+ *  Author: Castillo, Amaris
+ 			 Libutti, Leandro
+ 			 Sanjuan, Diego
+ 			 Risso, Agustin
  */
 
 #include "chip.h"
