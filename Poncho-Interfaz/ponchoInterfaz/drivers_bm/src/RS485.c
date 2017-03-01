@@ -1,7 +1,8 @@
+
 /*
  * mRS485.c
  *
- *  Created on: 01/01/2016
+ *  Created on: 21/01/2017
  *  Author: Castillo, Amarís Lorena
  *  		Lubutti, Leandro Ariel
  *  		Risso, Agustín Lautaro

@@ -42,6 +42,7 @@ uint16_t convertirAscii_Num(unsigned char s1, unsigned char s2, unsigned char s3
 	uint16_t result = ((n1 * 10000) + (n2 * 1000) + (n3 * 100) + (n4 * 10) + n5);
 	return result;
 }
+
 //convierte los datos de 3 caracteres a integer. 
 uint16_t convertirAscii_Num2(unsigned char s1, unsigned char s2, unsigned char s3) {
 	int n1 = s1 - '0';
@@ -50,6 +51,7 @@ uint16_t convertirAscii_Num2(unsigned char s1, unsigned char s2, unsigned char s
 	uint16_t result = ((n1 * 100) + (n2 * 10) + n3);
 	return result;
 }
+
 //inicialización de la MEF
 void Init_MEF(void) {
 
@@ -706,7 +708,6 @@ void printing(unsigned char gas, uint16_t data) {
 }
 
 
-
 //actualiza la MEF.
 void UpdateMEF(unsigned char tecla,uint16_t data1,uint16_t data2,uint16_t data3, uint16_t data4) {
 
@@ -790,6 +791,7 @@ void UpdateMEF(unsigned char tecla,uint16_t data1,uint16_t data2,uint16_t data3,
 			}
 		}
 		break;
+
 	case 'P': //Estado proporcion. elige si se quieren observar los gases en partes por millon o porcentaje
 		lcd_gotoxy(1, 1);
 		printf_lcd("   PROPORCION   ");

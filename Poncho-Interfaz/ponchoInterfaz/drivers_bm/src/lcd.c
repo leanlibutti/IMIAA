@@ -1,9 +1,13 @@
+/*
+ * lcd.c
+ *
+ *  Created on: 15/01/16
+ *  Author: Matias Leandro Ferraro
+ */
 
 #include "lcd.h"
 #include "puertos.h"
 LCD_DATA_Type data;
-
-//configuravion de los puertos del LCD
 void lcd_init_port(void)
 {
      port_pin(LCD_PORT,LCD_RS,MD_PLN,init_out);
@@ -166,7 +170,6 @@ void lcd_init(void)
     delay();
 }
 
-//posicionamiento en el LCD
 void lcd_gotoxy(int x, int y)
 {
 //numeracion de los caracteres dentro del display
@@ -202,7 +205,7 @@ void lcd_gotoxy(int x, int y)
    data.RS=0;
    enviar_lcd(data);
 }
-//escribe un caracter en el LCD
+
 void lcd_putc(char C)
 {
    LCD_DATA_Type data;
@@ -267,8 +270,6 @@ void enviar_lcd (LCD_DATA_Type data)
    port_pin(LCD_PORT,LCD_EN, disable, low);
    delay();
 }
-
-//imprime un string en el LCD
 void printf_lcd(char * string)
 {
    int c=0;

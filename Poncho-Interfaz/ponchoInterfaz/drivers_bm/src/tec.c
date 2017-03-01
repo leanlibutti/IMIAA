@@ -1,5 +1,4 @@
 
-
 #include "tec.h"
 #include "chip.h"
 #include "cmsis.h"
@@ -35,7 +34,11 @@
 #define GPIO_PORT_F4IN   2
 #define GPIO_PIN_F4IN    0
 
+<<<<<<< HEAD
 //Se utiliza las columnas como salidas
+=======
+//SE DEFINE COLUMNAS COMO SALIDA
+>>>>>>> aa8d858a4f70f1f53b0870337e61795a563caba8
 //COLUMNA1
 #define SCU_PORT_C1OUT     4
 #define SCU_PIN__C1OUT     3

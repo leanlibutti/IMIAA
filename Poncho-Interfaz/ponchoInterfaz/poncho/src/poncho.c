@@ -422,7 +422,6 @@ int main(void) {
 	KEYBOARD_init();
 	lcd_gotoxy(1,1);
 
-
 	//inicializacion del Receptor
 	uartConfig(address);
 
@@ -469,6 +468,7 @@ int main(void) {
 		}
 
 		//enciende el LED si el flag está activo, sino lo apaga.
+
 		if(prender_led=='1'){
 			port_pin(6,12, disable, high);
 		}

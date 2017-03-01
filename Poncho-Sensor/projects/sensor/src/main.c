@@ -22,7 +22,11 @@ unsigned char minutos=0;
 unsigned char segundos=0;
 unsigned char flag_identificador=0; //utilizado para saber que dato modificar 
 unsigned char flag_ubicacion=0; //utilizado para saber que digito del dato voy a leer
+<<<<<<< HEAD
 unsigned char flag_iniciar =0; 
+=======
+unsigned char flag_iniciar =0; //utilizada para iniciar el procesamiento de datos luego de recibir algun dato de la placa interfaz
+>>>>>>> aa8d858a4f70f1f53b0870337e61795a563caba8
 unsigned char dato;
 uint16_t dato2;
 
@@ -44,11 +48,11 @@ uint8_t UART0_IRQHandler(){
 				break;
 			}
 			case 2 :{ //modificar los minutos 		
-				if(flag_ubicacion == 0){
+				if(flag_ubicacion == 0){ //modificar la parte baja del dato
 					minutos = dato;
 					flag_ubicacion ++;
 				}
-				else{
+				else{ //modificar la parte alta del dato
 					minutos= (dato*10) + minutos;
 					flag_ubicacion--;
 					flag_identificador=0; 
@@ -56,11 +60,12 @@ uint8_t UART0_IRQHandler(){
 				break;
 			}
 			case 3 :{ //modificar los segundos
-				if(flag_ubicacion == 0){
+
+				if(flag_ubicacion == 0){//modificar la parte baja del dato
 					segundos = dato;
 					flag_ubicacion ++;
 				}
-				else{
+				else{//modificar la parte alta del dato
 					segundos= (dato*10) + segundos;
 					flag_ubicacion--;
 					flag_identificador=0; 
@@ -69,11 +74,12 @@ uint8_t UART0_IRQHandler(){
 				break;
 			}
 			case 4 :{ //modificar el umbral_mq2
-				if(flag_ubicacion == 0){
+
+				if(flag_ubicacion == 0){//modificar la parte baja del dato
 					umbral_mq2 = dato2;
 					flag_ubicacion ++;
 				}
-				else{
+				else{//modificar la parte alta del dato
 					umbral_mq2= (dato2 << 8) | (umbral_mq2);
 					flag_ubicacion--;
 					flag_identificador=0;
@@ -82,11 +88,12 @@ uint8_t UART0_IRQHandler(){
 				break;
 			}
 			case 5 :{ //modificar l umbral_mq3
-				if(flag_ubicacion == 0){
+
+				if(flag_ubicacion == 0){//modificar la parte baja del dato
 					umbral_mq3 = dato2;
 					flag_ubicacion ++;
 				}
-				else{
+				else{//modificar la parte alta del dato
 					umbral_mq3= ((dato2 << 8) | (umbral_mq3));
 					flag_ubicacion--;
 					flag_identificador=0;
@@ -95,11 +102,12 @@ uint8_t UART0_IRQHandler(){
 				break;
 			}
 			case 6 :{ //modificar el umbral_mq135
-				if(flag_ubicacion == 0){
+
+				if(flag_ubicacion == 0){//modificar la parte baja del dato
 					umbral_mq135 = dato2;
 					flag_ubicacion ++;
 				}
-				else{
+				else{//modificar la parte alta del dato
 					umbral_mq135= ((dato2 << 8) | (umbral_mq135));
 					flag_ubicacion--;
 					flag_identificador=0; 
@@ -108,11 +116,11 @@ uint8_t UART0_IRQHandler(){
 				break;
 			}
 			case 7 :{ //modificar el umbral_temp
-				if(flag_ubicacion == 0){
+				if(flag_ubicacion == 0){//modificar la parte baja del dato
 					umbral_temp = dato2;
 					flag_ubicacion ++;
 				}
-				else{
+				else{//modificar la parte alta del dato
 					umbral_temp= (dato2 << 8) | (umbral_temp);
 					flag_ubicacion--;
 					flag_identificador=0; 
@@ -122,7 +130,7 @@ uint8_t UART0_IRQHandler(){
 			}
 		}
 	}
-	else{ //modifico el identificador
+	else{ //modifico el identificador del dato a recibir posteriormente
 		flag_iniciar=0;
 		switch(dato){
 			case 'h':{
@@ -165,7 +173,7 @@ uint8_t UART0_IRQHandler(){
 void SysTick_Handler(void)
 {
 	ms_ticks ++;
-	if(ms_ticks == 1000){
+	if(ms_ticks == 1000){ //aumento un segundo a la hora del sistema 
 		segundos ++;
 		if (segundos == 60){
 			minutos ++;
@@ -184,16 +192,18 @@ void SysTick_Handler(void)
 void config_sensor(){
 	//configuracion del chip
     Board_Init();
+
+    //configuracion de la interrupcion del reloj del sistema 
     SystemCoreClockUpdate();
-    SysTick_Config(SystemCoreClock / 1000); // configurado para que interrumpa cada 1 ms
+    SysTick_Config(SystemCoreClock / 1000); // interrupcion cada 1 ms
 
 	//configuracion del adc
-	analogConfig(ENABLE_ANALOG_INPUTS);
+	analogConfig(ENABLE_ANALOG_INPUTS); 
 
-	//configuracion del Rs485
+	//configuracion del protocolo Rs485
 	uint8_t direccion;
 	direccion= 1;
-	rsConfig(direccion);
+	rsConfig(direccion); 
 
 	//configuracion de la sd
 	config_sd();
@@ -201,12 +211,12 @@ void config_sensor(){
 }
 
 int main(){
-  unsigned char hacer= 2;
+  unsigned char hacer= 2; //utilizado para que el envio de la temperatura a la placa interfaz sea cada 1 segundo
   uint16_t medida_mq135;
   uint16_t medida_mq2;
   uint16_t medida_mq3;
   uint16_t medida_temp;
-  uint8_t array[2];
+  uint8_t array[2]; //utilizado para recibir parte alta y baja del dato por la UART
   config_sensor();
   while(1){
 	//leo las medidas de los 4 sensores (medida en 16 bits de tensiones)
